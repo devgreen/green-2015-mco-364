@@ -6,8 +6,7 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 public class SmileComponent extends JComponent {
-	
-	
+
 	boolean wink = false;
 	boolean half = false;
 
@@ -44,7 +43,7 @@ public class SmileComponent extends JComponent {
 			half = false;
 
 		} else {
-			// g.drawLine(x1, y1, x2, y2);
+
 			g.drawLine(400, 200, 475, 200);
 			wink = false;
 
@@ -64,8 +63,5 @@ public class SmileComponent extends JComponent {
 		}
 
 	}
-
-	
-	
 
 }
