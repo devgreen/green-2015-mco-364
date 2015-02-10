@@ -28,7 +28,7 @@ public class Smile extends JFrame {
 				while (true) {
 					frame.repaint();
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(200);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
