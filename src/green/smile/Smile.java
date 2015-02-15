@@ -1,10 +1,8 @@
 package green.smile;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class Smile extends JFrame {
 
@@ -15,7 +13,7 @@ public class Smile extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Container contentPane = getContentPane();
-		contentPane.setLayout(new BorderLayout());
+		// contentPane.setLayout(new BorderLayout());
 
 		contentPane.add(new SmileComponent());
 
