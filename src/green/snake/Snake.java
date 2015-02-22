@@ -4,36 +4,45 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 import javax.swing.JFrame;
 
-public class Snake extends JFrame implements KeyListener{
+public class Snake extends JFrame implements KeyListener {
+	
+	private Deque <SnakePiece>snake = new ArrayDeque<SnakePiece>();
 
-	public Snake (){
-		
+	public Snake() {
+
 		setSize(800, 600);
 		setTitle("Snake");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
-		SnakeComponent c = new SnakeComponent();
-		contentPane.add(c);
-		c.addKeyListener(this);
-		c.setFocusable(true);
+		SnakeScreen screen = new SnakeScreen(snake);
+		contentPane.add(screen);
+		screen.addKeyListener(this);
+		screen.setFocusable(true);
+
+		contentPane.add(screen);
 		
-		contentPane.add(c);
-		
-		
-		
-		
-		
+		this.addPiece();
+		this.addPiece();
+
 	}
 	
-	public static void main (String [] args){
+	public void addPiece(){
+		SnakePiece last = snake.getLast();
+		SnakePiece p = new SnakePiece(last.getX()+10, last.getY()+10, last.getWidth()+10);
+		snake.add(p);
+	}
+
+	public static void main(String[] args) {
 		final Snake frame = new Snake();
 		frame.setVisible(true);
-		
+
 		Thread thread = new Thread() {
 			public void run() {
 				while (true) {
@@ -55,20 +64,23 @@ public class Snake extends JFrame implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("pressed");
-		
+		System.out.println("pressed" + e.getKeyCode());
+		SnakePiece head = snake.getFirst();
+		SnakePiece newPiece = new SnakePiece(head.getX()-5, head.getY()-5, head.getWidth()+5);
+		snake.addFirst(newPiece);
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
