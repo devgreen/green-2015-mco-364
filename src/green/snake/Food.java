@@ -1,5 +1,8 @@
 package green.snake;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 import javax.swing.JComponent;
 
 public class Food extends JComponent {
@@ -12,6 +15,13 @@ public class Food extends JComponent {
 		this.x = x;
 		this.y = y;
 		this.size = size;
+	}
+	
+	public void paint (Graphics g){
+		
+		g.setColor(Color.RED);
+		g.fillRect(x, y, size, size);
+		
 	}
 
 	@Override
