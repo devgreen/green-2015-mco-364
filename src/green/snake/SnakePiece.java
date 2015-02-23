@@ -15,7 +15,7 @@ public class SnakePiece extends JComponent{
 		this.y = y;
 		this.size = size;	
 	}
-	
+/*	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -25,7 +25,7 @@ public class SnakePiece extends JComponent{
 		g.fillRect(x, y, size, size);
 	
 	
-	}
+	}*/
 
 
 	public int getX() {

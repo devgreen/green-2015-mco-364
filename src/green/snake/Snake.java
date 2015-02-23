@@ -10,8 +10,9 @@ import java.util.Deque;
 import javax.swing.JFrame;
 
 public class Snake extends JFrame implements KeyListener {
-	
-	private Deque <SnakePiece>snake = new ArrayDeque<SnakePiece>();
+
+	private Deque<SnakePiece> snake = new ArrayDeque<SnakePiece>();
+	private SnakeScreen screen;
 
 	public Snake() {
 
@@ -21,21 +22,21 @@ public class Snake extends JFrame implements KeyListener {
 
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
-		SnakeScreen screen = new SnakeScreen(snake);
+		screen = new SnakeScreen(snake);
 		contentPane.add(screen);
 		screen.addKeyListener(this);
 		screen.setFocusable(true);
 
 		contentPane.add(screen);
-		
+
 		this.addPiece();
 		this.addPiece();
 
 	}
-	
-	public void addPiece(){
+
+	public void addPiece() {
 		SnakePiece last = snake.getLast();
-		SnakePiece p = new SnakePiece(last.getX()+10, last.getY()+10, last.getWidth()+10);
+		SnakePiece p = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
 		snake.add(p);
 	}
 
@@ -48,9 +49,8 @@ public class Snake extends JFrame implements KeyListener {
 				while (true) {
 					frame.repaint();
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -61,13 +61,70 @@ public class Snake extends JFrame implements KeyListener {
 		thread.start();
 	}
 
+	public void moveSnake(KeyEvent e) {
+		int key = e.getKeyCode();
+		SnakePiece last;
+		SnakePiece first;
+		Food f = screen.getFood();
+		switch (key) {
+
+		case 37:
+			last = snake.getLast();
+			first = snake.getFirst();
+			SnakePiece newPiece = new SnakePiece(last.getX() - 10, last.getY(), last.getPieceSize());
+			snake.removeFirst();
+			snake.addLast(newPiece);
+
+			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
+				SnakePiece add = new SnakePiece(first.getX() - 20, first.getY(), first.getPieceSize());
+				snake.addFirst(add);
+
+			}
+			break;
+		case 38:
+			last = snake.getLast();
+			first = snake.getFirst();
+			newPiece = new SnakePiece(last.getX(), last.getY() - 10, last.getPieceSize());
+			snake.removeFirst();
+			snake.addLast(newPiece);
+
+			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
+				SnakePiece add = new SnakePiece(first.getX() - 20, first.getY(), first.getPieceSize());
+				snake.addFirst(add);
+
+			}
+			break;
+		case 39:
+			last = snake.getLast();
+			first = snake.getFirst();
+			newPiece = new SnakePiece(last.getX() + 10, last.getY(), last.getPieceSize());
+			snake.removeFirst();
+			snake.addLast(newPiece);
+			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
+				SnakePiece add = new SnakePiece(first.getX() - 20, first.getY(), first.getPieceSize());
+				snake.addFirst(add);
+
+			}
+			break;
+		case 40:
+			last = snake.getLast();
+			first = snake.getFirst();
+			newPiece = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
+			snake.removeFirst();
+			snake.addLast(newPiece);
+			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
+				SnakePiece add = new SnakePiece(first.getX() - 20, first.getY(), first.getPieceSize());
+				snake.addFirst(add);
+
+			}
+			break;
+		}
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("pressed" + e.getKeyCode());
-		SnakePiece head = snake.getFirst();
-		SnakePiece newPiece = new SnakePiece(head.getX()-5, head.getY()-5, head.getWidth()+5);
-		snake.addFirst(newPiece);
+		// System.out.println("pressed" + e.getKeyCode());
+		moveSnake(e);
 
 	}
 
