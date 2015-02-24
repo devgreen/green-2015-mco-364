@@ -1,12 +1,9 @@
 package green.snake;
 
-import java.awt.Graphics;
 import java.util.Deque;
 import java.util.Iterator;
 
-import javax.swing.JComponent;
-
-public class SnakePiece extends JComponent {
+public class SnakePiece {
 
 	private int x;
 	private int y;
@@ -17,27 +14,23 @@ public class SnakePiece extends JComponent {
 		this.y = y;
 		this.size = size;
 	}
-	
-	public boolean equals(SnakePiece piece){
 
-		if(x==piece.getX() && y ==piece.getY()){
+	public boolean equals(Object other) {
 
-			return true;
-
+		if (other instanceof SnakePiece) {
+			if (this.x == ((SnakePiece) other).getX() && this.y == ((SnakePiece) other).getY()) {
+				return true;
+			}
 		}
 
-		else{
-
-			return false;
-
-		}
+		return false;
 
 	}
-	
-	public boolean contains(SnakePiece p, Deque<SnakePiece>snake){
+
+	public boolean contains(SnakePiece p, Deque<SnakePiece> snake) {
 		Iterator<SnakePiece> iter = snake.iterator();
-		while (iter.hasNext()){
-			if (iter.next().equals(p)){
+		while (iter.hasNext()) {
+			if (iter.next().equals(p)) {
 				return true;
 			}
 		}

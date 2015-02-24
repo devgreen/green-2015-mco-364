@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class Food extends JComponent {
-
+public class Food extends JComponent{
+	
 	int x;
 	int y;
 	int size;
@@ -37,4 +37,5 @@ public class Food extends JComponent {
 	public int getFoodSize() {
 		return size;
 	}
+
 }

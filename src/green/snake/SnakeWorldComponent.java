@@ -1,18 +1,21 @@
-package snake2;
+package green.snake;
 
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class SnakeWorldComponent extends JComponent{
-	
+public class SnakeWorldComponent extends JComponent {
+
 	private SnakeWorld world;
-	
-	public SnakeWorldComponent(SnakeWorld world){
+
+	public SnakeWorld getWorld() {
+		return world;
+	}
+
+	public SnakeWorldComponent(SnakeWorld world) {
 		this.world = world;
 	}
-	
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -22,6 +25,5 @@ public class SnakeWorldComponent extends JComponent{
 		world.draw(g);
 
 	}
-	
 
 }

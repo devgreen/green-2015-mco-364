@@ -3,30 +3,27 @@ package green.snake;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-
-import javax.swing.JComponent;
+import java.util.Random;
 
 public class SnakeBody {
 
 	private Deque<SnakePiece> snake;
-	private Set<SnakePiece> set = new HashSet<SnakePiece>();
 	private int lastDirection = 40;
+	private boolean status = true;
+
+	public boolean isStatus() {
+		return status;
+	}
 
 	public SnakeBody() {
 
 		snake = new ArrayDeque<SnakePiece>();
-		//this.snake = snake;
 		SnakePiece p = new SnakePiece(20, 20, 10);
 		snake.addFirst(p);
-		set.add(p);
 		this.addPiece();
 		this.addPiece();
 
@@ -36,34 +33,10 @@ public class SnakeBody {
 		SnakePiece last = snake.getLast();
 		SnakePiece p = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
 		snake.addLast(p);
-		set.add(p);
+
 	}
 
-	public void paint(Graphics g) {
-
-		Iterator<SnakePiece> piece = snake.iterator();
-		while (piece.hasNext()) {
-
-			SnakePiece p = piece.next();
-			if (p.equals(snake.getLast())) {
-				g.setColor(Color.GREEN);
-				g.fillRect(p.getX(), p.getY(), 10, 10);
-				// if (p.getX() == food.getX() && p.getY() == food.getY()){
-				// Random random = new Random();
-				// int x = random.nextInt(75) * 10;
-				// int y = random.nextInt(53) * 10;
-				// food = new Food(x, y, 10);
-				//
-				//
-				// }
-			} else {
-				g.setColor(Color.BLACK);
-				g.fillRect(p.getX(), p.getY(), 10, 10);
-			}
-		}
-	}
-
-	public void moveSnake(KeyEvent e, Food f, SnakeScreen2 screen) {
+	public void moveSnake(KeyEvent e, Food food, SnakeFrame s) {
 		int key = e.getKeyCode();
 
 		SnakePiece last;
@@ -78,24 +51,22 @@ public class SnakeBody {
 			last = snake.getLast();
 			first = snake.getFirst();
 			SnakePiece newPiece = new SnakePiece(last.getX() - 10, last.getY(), last.getPieceSize());
-			if (set.contains(newPiece)) {
-				screen.setEnabled(false);
-				break;
+			if (snake.contains(newPiece)) {
+				status = false;
+				// gameover
 			}
-			//SnakePiece toRemove = snake.removeFirst();
-			//set.remove(toRemove);
 			snake.removeFirst();
 			snake.addLast(newPiece);
-			//set.add(newPiece);
+			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
+				status = false;
+				// game over
+			}
 
-			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
-				SnakePiece add = new SnakePiece(first.getX() - 10, first.getY(), first.getPieceSize());
+			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
-				set.add(add);
 				first = snake.getFirst();
-				// add = new SnakePiece(first.getX() - 10, first.getY(),
-				// first.getPieceSize());
-				// snake.addFirst(add);
+				snake.addFirst(add);
 
 			}
 			lastDirection = 37;
@@ -107,24 +78,24 @@ public class SnakeBody {
 			last = snake.getLast();
 			first = snake.getFirst();
 			newPiece = new SnakePiece(last.getX(), last.getY() - 10, last.getPieceSize());
-			if (set.contains(newPiece)) {
-				screen.setEnabled(false);
-				break;
+			if (snake.contains(newPiece)) {
+				status = false;
+				// game over
 			}
-			//toRemove = snake.removeFirst();
-			//set.remove(toRemove);
+
 			snake.removeFirst();
 			snake.addLast(newPiece);
-			//set.add(newPiece);
 
-			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
-				SnakePiece add = new SnakePiece(first.getX() - 10, first.getY(), first.getPieceSize());
+			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
+				status = false;
+				// game over
+			}
+
+			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
-				set.add(add);
-				// add = new SnakePiece(first.getX() - 10, first.getY(),
-				// first.getPieceSize());
-				// snake.addFirst(add);
+				snake.addFirst(add);
 
 			}
 			lastDirection = 38;
@@ -136,24 +107,24 @@ public class SnakeBody {
 			last = snake.getLast();
 			first = snake.getFirst();
 			newPiece = new SnakePiece(last.getX() + 10, last.getY(), last.getPieceSize());
-			if (set.contains(newPiece)) {
-				screen.setEnabled(false);
-				break;
+			if (snake.contains(newPiece)) {
+				status = false;
+
+				System.out.println("hit myslef");
 			}
-			//toRemove = snake.removeFirst();
-			//set.remove(toRemove);
+
 			snake.removeFirst();
 			snake.addLast(newPiece);
-			//set.add(newPiece);
 
-			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
-				SnakePiece add = new SnakePiece(first.getX() - 10, first.getY(), first.getPieceSize());
+			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
+				status = false;
+				// game over
+			}
+			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
-				set.add(add);
-				// add = new SnakePiece(first.getX() - 10, first.getY(),
-				// first.getPieceSize());
-				// snake.addFirst(add);
+				snake.addFirst(add);
 
 			}
 			lastDirection = 39;
@@ -165,37 +136,46 @@ public class SnakeBody {
 			last = snake.getLast();
 			first = snake.getFirst();
 			newPiece = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
-			if (set.contains(newPiece)) {
-				screen.setEnabled(false);
-				break;
+			if (snake.contains(newPiece)) {
+				status = false;
 			}
-			//toRemove = snake.removeFirst();
-			//set.remove(toRemove);
+
 			snake.removeFirst();
 			snake.addLast(newPiece);
-			//set.add(newPiece);
 
-			if (snake.getLast().getX() == f.getX() && snake.getLast().getY() == f.getY()) {
-				SnakePiece add = new SnakePiece(first.getX() - 10, first.getY(), first.getPieceSize());
+			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
+				status = false;
+				// game over
+			}
+			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
-				set.add(add);
-				// add = new SnakePiece(first.getX() - 10, first.getY(),
-				// first.getPieceSize());
-				// snake.addFirst(add);
+				snake.addFirst(add);
 
 			}
 			lastDirection = 40;
 			break;
 		}
 	}
-	
-	public SnakePiece getHead(){
-		return snake.peekLast();
-	}
+
+	// public boolean checkCollision(SnakePiece p) {
+	// Iterator<SnakePiece> iter = snake.iterator();
+	// while (iter.hasNext()) {
+	// SnakePiece piece = iter.next();
+	// if (p.equals(piece)) {
+	// return true;
+	// }
+	// }
+	// return false;
+	// }
 
 	public Iterator<SnakePiece> iterator() {
 		return snake.iterator();
+	}
+
+	public SnakePiece getLast() {
+		return snake.getLast();
 	}
 
 }
