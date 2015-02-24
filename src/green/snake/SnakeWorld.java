@@ -47,7 +47,8 @@ public class SnakeWorld {
 					int x = (random.nextInt(75) + 1) * 10;
 					int y = (random.nextInt(53) + 1) * 10;
 					food = new Food(x, y, 10);
-					while (body.checkCollision(food)) {
+					boolean place = body.checkCollision(food);
+					while (place) {
 						x = (random.nextInt(75) + 1) * 10;
 						y = (random.nextInt(53) + 1) * 10;
 						food = new Food(x, y, 10);

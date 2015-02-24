@@ -5,7 +5,7 @@ import java.awt.Graphics;
 
 import javax.swing.JComponent;
 
-public class Food extends JComponent{
+public class Food {
 	
 	int x;
 	int y;
@@ -24,12 +24,12 @@ public class Food extends JComponent{
 		
 	}
 
-	@Override
+	
 	public int getX() {
 		return x;
 	}
 
-	@Override
+	
 	public int getY() {
 		return y;
 	}
