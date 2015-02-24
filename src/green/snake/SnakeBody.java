@@ -36,7 +36,7 @@ public class SnakeBody {
 
 	}
 
-	public void moveSnake(KeyEvent e, Food food, SnakeFrame s) {
+	public void moveSnake(KeyEvent e, Food food) {
 		int key = e.getKeyCode();
 
 		SnakePiece last;
@@ -159,16 +159,17 @@ public class SnakeBody {
 		}
 	}
 
-	// public boolean checkCollision(SnakePiece p) {
-	// Iterator<SnakePiece> iter = snake.iterator();
-	// while (iter.hasNext()) {
-	// SnakePiece piece = iter.next();
-	// if (p.equals(piece)) {
-	// return true;
-	// }
-	// }
-	// return false;
-	// }
+	public boolean checkCollision(Food f) {
+		// boolean location;
+		Iterator<SnakePiece> iter = snake.iterator();
+		while (iter.hasNext()) {
+			SnakePiece piece = iter.next();
+			if (f.getX() == piece.getX() && f.getY() == piece.getY()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public Iterator<SnakePiece> iterator() {
 		return snake.iterator();

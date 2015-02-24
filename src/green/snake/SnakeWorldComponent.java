@@ -24,6 +24,10 @@ public class SnakeWorldComponent extends JComponent {
 
 		world.draw(g);
 
+		if (!world.getBody().isStatus()) {
+			g.drawString("Game Over!", 380, 270);
+		}
+
 	}
 
 }

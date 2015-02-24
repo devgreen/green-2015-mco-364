@@ -30,7 +30,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		screen.getBody().moveSnake(e, screen.getFood(), this);
+		screen.getBody().moveSnake(e, screen.getFood());
 
 	}
 

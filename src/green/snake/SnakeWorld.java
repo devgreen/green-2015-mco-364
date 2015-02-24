@@ -15,11 +15,14 @@ public class SnakeWorld {
 
 		this.body = new SnakeBody();
 		Random random = new Random();
-		int x1 = random.nextInt(65) + 10;
-		int y1 = random.nextInt(43) + 10;
-		int x2 = x1 * 10;
-		int y2 = y1 * 10;
-		food = new Food(x2, y2, 10);
+		int x = (random.nextInt(75) + 1) * 10;
+		int y = (random.nextInt(53) + 1) * 10;
+		food = new Food(x, y, 10);
+		while (body.checkCollision(food)) {
+			x = (random.nextInt(75) + 1) * 10;
+			y = (random.nextInt(53) + 1) * 10;
+			food = new Food(x, y, 10);
+		}
 	}
 
 	public SnakeBody getBody() {
@@ -41,9 +44,14 @@ public class SnakeWorld {
 				g.fillRect(p.getX(), p.getY(), 10, 10);
 				if (p.getX() == food.getX() && p.getY() == food.getY()) {
 					Random random = new Random();
-					int x = (random.nextInt(75)) * 10;
-					int y = (random.nextInt(53)) * 10;
+					int x = (random.nextInt(75) + 1) * 10;
+					int y = (random.nextInt(53) + 1) * 10;
 					food = new Food(x, y, 10);
+					while (body.checkCollision(food)) {
+						x = (random.nextInt(75) + 1) * 10;
+						y = (random.nextInt(53) + 1) * 10;
+						food = new Food(x, y, 10);
+					}
 
 				}
 			}
