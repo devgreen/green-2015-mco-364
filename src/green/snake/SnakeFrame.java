@@ -16,7 +16,6 @@ public class SnakeFrame extends JFrame implements KeyListener {
 		setSize(800, 600);
 		setTitle("Snake");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 		SnakeWorldComponent world = new SnakeWorldComponent(screen);

@@ -19,11 +19,8 @@ public class SnakeWorldComponent extends JComponent {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
 		g.drawRect(10, 10, 760, 540);
-
 		world.draw(g);
-
 		if (!world.getBody().isStatus()) {
 			g.drawString("Game Over!", 380, 270);
 		}

@@ -26,16 +26,16 @@ public class SnakePiece {
 		return false;
 
 	}
-
-	public boolean contains(SnakePiece p, Deque<SnakePiece> snake) {
-		Iterator<SnakePiece> iter = snake.iterator();
-		while (iter.hasNext()) {
-			if (iter.next().equals(p)) {
-				return true;
-			}
-		}
-		return false;
-	}
+//
+//	public boolean contains(SnakePiece p, Deque<SnakePiece> snake) {
+//		Iterator<SnakePiece> iter = snake.iterator();
+//		while (iter.hasNext()) {
+//			if (iter.next().equals(p)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	public int getX() {
 		return x;

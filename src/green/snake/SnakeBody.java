@@ -41,6 +41,8 @@ public class SnakeBody {
 
 		SnakePiece last;
 		SnakePiece first;
+		int lastX = snake.getLast().getX() + 10;
+		int lastY = snake.getLast().getY() + 10;
 
 		switch (key) {
 
@@ -49,6 +51,7 @@ public class SnakeBody {
 				break;
 			}
 			last = snake.getLast();
+			
 			first = snake.getFirst();
 			SnakePiece newPiece = new SnakePiece(last.getX() - 10, last.getY(), last.getPieceSize());
 			if (snake.contains(newPiece)) {
@@ -62,7 +65,15 @@ public class SnakeBody {
 				// game over
 			}
 
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+		/*	if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
+				snake.addFirst(add);
+				first = snake.getFirst();
+				snake.addFirst(add);
+
+			}*/
+			
+			if (lastX == food.getX() && lastY == food.getY()) {
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
@@ -98,6 +109,13 @@ public class SnakeBody {
 				snake.addFirst(add);
 
 			}
+			if (lastX == food.getX() && lastY == food.getY()) {
+				SnakePiece add = snake.getFirst();
+				snake.addFirst(add);
+				first = snake.getFirst();
+				snake.addFirst(add);
+
+			}
 			lastDirection = 38;
 			break;
 		case 39:
@@ -121,6 +139,13 @@ public class SnakeBody {
 				// game over
 			}
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				SnakePiece add = snake.getFirst();
+				snake.addFirst(add);
+				first = snake.getFirst();
+				snake.addFirst(add);
+
+			}
+			if (lastX == food.getX() && lastY == food.getY()) {
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
@@ -154,6 +179,13 @@ public class SnakeBody {
 				snake.addFirst(add);
 
 			}
+			if (lastX == food.getX() && lastY == food.getY()) {
+				SnakePiece add = snake.getFirst();
+				snake.addFirst(add);
+				first = snake.getFirst();
+				snake.addFirst(add);
+
+			}
 			lastDirection = 40;
 			break;
 		}
@@ -164,7 +196,9 @@ public class SnakeBody {
 		Iterator<SnakePiece> iter = snake.iterator();
 		while (iter.hasNext()) {
 			SnakePiece piece = iter.next();
-			if (f.getX() == piece.getX() && f.getY() == piece.getY()) {
+			int a = piece.getX();
+			int b = piece.getY();
+			if (f.getX() >= (a +10) && f.getY() >= (b +10)) {
 				return true;
 			}
 		}
