@@ -12,7 +12,12 @@ import java.util.Random;
 public class SnakeBody {
 
 	private Deque<SnakePiece> snake;
-	private String lastDirection = "right";
+	private int lastDirection = 40;
+
+	public int getLastDirection() {
+		return lastDirection;
+	}
+
 	private boolean status = true;
 
 	public boolean isStatus() {
@@ -26,6 +31,7 @@ public class SnakeBody {
 		snake.addFirst(p);
 		this.addPiece();
 		this.addPiece();
+		// this.addPiece();
 
 	}
 
@@ -36,13 +42,16 @@ public class SnakeBody {
 
 	}
 
-	/*public void moveSnake(KeyEvent e, Food food) {
-		int key = e.getKeyCode();
+	public void callMove(int key, Food food) {
+		moveSnake(key, food);
+	}
+
+	public void moveSnake(int key, Food food) {
 
 		SnakePiece last;
 		SnakePiece first;
-		//int lastX = snake.getLast().getX() + 10;
-		//int lastY = snake.getLast().getY() + 10;
+		// int lastX = snake.getLast().getX() + 10;
+		// int lastY = snake.getLast().getY() + 10;
 
 		switch (key) {
 
@@ -51,7 +60,7 @@ public class SnakeBody {
 				break;
 			}
 			last = snake.getLast();
-			
+
 			first = snake.getFirst();
 			SnakePiece newPiece = new SnakePiece(last.getX() - 10, last.getY(), last.getPieceSize());
 			if (snake.contains(newPiece)) {
@@ -65,8 +74,7 @@ public class SnakeBody {
 				// game over
 			}
 
-			
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY()== food.getY()) {
+			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
@@ -120,8 +128,6 @@ public class SnakeBody {
 			newPiece = new SnakePiece(last.getX() + 10, last.getY(), last.getPieceSize());
 			if (snake.contains(newPiece)) {
 				status = false;
-
-				System.out.println("hit myslef");
 			}
 
 			snake.removeFirst();
@@ -183,160 +189,6 @@ public class SnakeBody {
 			break;
 		}
 	}
-*/
-	
-	public void moveSnake(String direction, Food food) {
-		this.lastDirection = direction;
-		
-
-		SnakePiece last;
-		SnakePiece first;
-		//int lastX = snake.getLast().getX() + 10;
-		//int lastY = snake.getLast().getY() + 10;
-
-		switch (lastDirection) {
-
-		case "left":
-			if (lastDirection.equals("right")) {
-				break;
-			}
-			last = snake.getLast();
-			
-			first = snake.getFirst();
-			SnakePiece newPiece = new SnakePiece(last.getX() - 10, last.getY(), last.getPieceSize());
-			if (snake.contains(newPiece)) {
-				status = false;
-				// gameover
-			}
-			snake.removeFirst();
-			snake.addLast(newPiece);
-			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
-				status = false;
-				// game over
-			}
-
-			
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY()== food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			setLastDirection("left");
-			break;
-		case "up":
-			if (lastDirection.equals("down")) {
-				break;
-			}
-			last = snake.getLast();
-			first = snake.getFirst();
-			newPiece = new SnakePiece(last.getX(), last.getY() - 10, last.getPieceSize());
-			if (snake.contains(newPiece)) {
-				status = false;
-				// game over
-			}
-
-			snake.removeFirst();
-			snake.addLast(newPiece);
-
-			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
-				status = false;
-				// game over
-			}
-
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			setLastDirection("up");
-			break;
-		case "right":
-			if (lastDirection.equals("left")) {
-				break;
-			}
-			last = snake.getLast();
-			first = snake.getFirst();
-			newPiece = new SnakePiece(last.getX() + 10, last.getY(), last.getPieceSize());
-			if (snake.contains(newPiece)) {
-				status = false;
-			}
-
-			snake.removeFirst();
-			snake.addLast(newPiece);
-
-			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
-				status = false;
-				// game over
-			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			setLastDirection("right");
-			break;
-		case "down":
-			if (lastDirection.equals("up")) {
-				break;
-			}
-			last = snake.getLast();
-			first = snake.getFirst();
-			newPiece = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
-			if (snake.contains(newPiece)) {
-				status = false;
-			}
-
-			snake.removeFirst();
-			snake.addLast(newPiece);
-
-			if (newPiece.getX() < 10 || newPiece.getX() > 760 || newPiece.getY() < 10 || newPiece.getY() > 540) {
-				status = false;
-				// game over
-			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
-			setLastDirection("down");
-			break;
-		}
-	}
-
-	
-	
-	public void setLastDirection(String lastDirection) {
-		this.lastDirection = lastDirection;
-	}
 
 	public boolean checkCollision(Food f) {
 		// boolean location;
@@ -358,10 +210,6 @@ public class SnakeBody {
 
 	public SnakePiece getLast() {
 		return snake.getLast();
-	}
-	
-	public String getLastDirection() {
-		return lastDirection;
 	}
 
 }

@@ -11,6 +11,11 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
 	private SnakeWorld screen = new SnakeWorld();
 	private SnakeWorldComponent world; 
+	private int keyPressed;
+
+	public int getKeyPressed() {
+		return keyPressed;
+	}
 
 	public SnakeFrame() {
 
@@ -23,7 +28,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 		world.addKeyListener(this);
 		world.setFocusable(true);
 		contentPane.add(world);
-		new GameThread(world).start();
+		new GameThread(this).start();
 
 	}
 	
@@ -34,27 +39,13 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int keyPressed = e.getKeyCode();
-		String direction = "";
-		switch(keyPressed){
-		case 37:
-			direction = "left";
-			screen.getBody().moveSnake(direction, screen.getFood());
-			break;
-		case 38:
-			direction = "up";
-			screen.getBody().moveSnake(direction, screen.getFood());
-			break;
-		case 39:
-			direction = "right";
-			screen.getBody().moveSnake(direction, screen.getFood());
-			break;
-		case 40:
-			direction = "down";
-			screen.getBody().moveSnake(direction, screen.getFood());
-			break;
+		keyPressed = e.getKeyCode();
 		
-		}
+			//direction = "left";
+			//screen.getBody().callMove(keyPressed, screen.getFood());
+		
+		
+		
 	}
 
 	public SnakeWorld getScreen() {
