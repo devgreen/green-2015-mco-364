@@ -12,6 +12,8 @@ public class GameThread extends Thread {
 
 		boolean game = world.getWorld().getBody().isStatus();
 		while (game) {
+			String direction = world.getWorld().getBody().getLastDirection();
+			world.getWorld().getBody().moveSnake(direction, world.getWorld().getFood());
 			world.repaint();
 			game = world.getWorld().getBody().isStatus();
 
@@ -24,5 +26,6 @@ public class GameThread extends Thread {
 		}
 
 	}
+
 
 }
