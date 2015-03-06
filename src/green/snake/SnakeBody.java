@@ -13,6 +13,7 @@ public class SnakeBody {
 
 	private Deque<SnakePiece> snake;
 	private int lastDirection = 40;
+	int num = 0;
 
 	public int getLastDirection() {
 		return lastDirection;
@@ -75,6 +76,7 @@ public class SnakeBody {
 			}
 
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				System.out.println ("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
@@ -104,19 +106,14 @@ public class SnakeBody {
 			}
 
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				System.out.println ("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
 
 			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
+			
 			lastDirection = 38;
 			break;
 		case 39:
@@ -138,19 +135,14 @@ public class SnakeBody {
 				// game over
 			}
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				System.out.println ("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
 
 			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
+		
 			lastDirection = 39;
 			break;
 		case 40:
@@ -172,19 +164,16 @@ public class SnakeBody {
 				// game over
 			}
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
+				System.out.println ("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
+				
+
 
 			}
-			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				SnakePiece add = snake.getFirst();
-				snake.addFirst(add);
-				first = snake.getFirst();
-				snake.addFirst(add);
-
-			}
+			
 			lastDirection = 40;
 			break;
 		}

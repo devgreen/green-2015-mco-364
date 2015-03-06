@@ -1,4 +1,4 @@
-package green.snake;
+/*package green.snake;
 
 public class move {
 
@@ -153,3 +153,4 @@ public class move {
 
 
 }
+*/
