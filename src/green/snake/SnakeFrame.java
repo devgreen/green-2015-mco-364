@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 public class SnakeFrame extends JFrame implements KeyListener {
 
-	private SnakeWorld screen = new SnakeWorld();
+	private SnakeWorld screen;
 	private SnakeWorldComponent world; 
 	private int keyPressed;
 
@@ -17,7 +17,8 @@ public class SnakeFrame extends JFrame implements KeyListener {
 		return keyPressed;
 	}
 
-	public SnakeFrame() {
+	public SnakeFrame() throws CloneNotSupportedException {
+		screen =  new SnakeWorld();
 
 		setSize(800, 600);
 		setTitle("Snake");
@@ -64,8 +65,15 @@ public class SnakeFrame extends JFrame implements KeyListener {
 	}
 
 	public static void main(String[] args) {
-		SnakeFrame frame = new SnakeFrame();
-		frame.setVisible(true);
+		SnakeFrame frame;
+		try {
+			frame = new SnakeFrame();
+			frame.setVisible(true);
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 

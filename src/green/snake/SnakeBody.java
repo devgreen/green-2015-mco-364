@@ -1,29 +1,16 @@
 package green.snake;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.Random;
 
-public class SnakeBody {
+public class SnakeBody implements Cloneable{
 
 	private Deque<SnakePiece> snake;
 	private int lastDirection = 40;
-	int num = 0;
-
-	public int getLastDirection() {
-		return lastDirection;
-	}
-
 	private boolean status = true;
 
-	public boolean isStatus() {
-		return status;
-	}
+	private int num = 0;
 
 	public SnakeBody() {
 
@@ -36,6 +23,14 @@ public class SnakeBody {
 
 	}
 
+	
+	
+	 @Override
+	    protected Object clone() throws CloneNotSupportedException {
+	        return super.clone();
+	    }
+
+
 	public void addPiece() {
 		SnakePiece last = snake.getLast();
 		SnakePiece p = new SnakePiece(last.getX(), last.getY() + 10, last.getPieceSize());
@@ -43,16 +38,10 @@ public class SnakeBody {
 
 	}
 
-	public void callMove(int key, Food food) {
-		moveSnake(key, food);
-	}
-
 	public void moveSnake(int key, Food food) {
 
 		SnakePiece last;
 		SnakePiece first;
-		// int lastX = snake.getLast().getX() + 10;
-		// int lastY = snake.getLast().getY() + 10;
 
 		switch (key) {
 
@@ -76,7 +65,7 @@ public class SnakeBody {
 			}
 
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				System.out.println ("I ate the food!" + ++num);
+				System.out.println("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
@@ -106,14 +95,14 @@ public class SnakeBody {
 			}
 
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				System.out.println ("I ate the food!" + ++num);
+				System.out.println("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
 
 			}
-			
+
 			lastDirection = 38;
 			break;
 		case 39:
@@ -135,14 +124,14 @@ public class SnakeBody {
 				// game over
 			}
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				System.out.println ("I ate the food!" + ++num);
+				System.out.println("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
 
 			}
-		
+
 			lastDirection = 39;
 			break;
 		case 40:
@@ -164,16 +153,14 @@ public class SnakeBody {
 				// game over
 			}
 			if (snake.getLast().getX() == food.getX() && snake.getLast().getY() == food.getY()) {
-				System.out.println ("I ate the food!" + ++num);
+				System.out.println("I ate the food!" + ++num);
 				SnakePiece add = snake.getFirst();
 				snake.addFirst(add);
 				first = snake.getFirst();
 				snake.addFirst(add);
-				
-
 
 			}
-			
+
 			lastDirection = 40;
 			break;
 		}
@@ -199,6 +186,14 @@ public class SnakeBody {
 
 	public SnakePiece getLast() {
 		return snake.getLast();
+	}
+
+	public int getLastDirection() {
+		return lastDirection;
+	}
+
+	public boolean isStatus() {
+		return status;
 	}
 
 }

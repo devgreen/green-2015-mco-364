@@ -1,8 +1,5 @@
 package green.snake;
 
-import java.util.Deque;
-import java.util.Iterator;
-
 public class SnakePiece {
 
 	private int x;
@@ -16,26 +13,24 @@ public class SnakePiece {
 	}
 
 	public boolean equals(Object other) {
-
 		if (other instanceof SnakePiece) {
 			if (this.x == ((SnakePiece) other).getX() && this.y == ((SnakePiece) other).getY()) {
 				return true;
 			}
 		}
-
 		return false;
-
 	}
-//
-//	public boolean contains(SnakePiece p, Deque<SnakePiece> snake) {
-//		Iterator<SnakePiece> iter = snake.iterator();
-//		while (iter.hasNext()) {
-//			if (iter.next().equals(p)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
+
+	//
+	// public boolean contains(SnakePiece p, Deque<SnakePiece> snake) {
+	// Iterator<SnakePiece> iter = snake.iterator();
+	// while (iter.hasNext()) {
+	// if (iter.next().equals(p)) {
+	// return true;
+	// }
+	// }
+	// return false;
+	// }
 
 	public int getX() {
 		return x;

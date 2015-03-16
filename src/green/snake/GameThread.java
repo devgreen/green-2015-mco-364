@@ -2,29 +2,27 @@ package green.snake;
 
 public class GameThread extends Thread {
 
-	private SnakeWorldComponent world;
 	private SnakeFrame frame;
-	
 
-/*	public GameThread(SnakeWorldComponent world) {
-		this.world = world;
-	}*/
-	
-	public GameThread(SnakeFrame frame){
+	public GameThread(SnakeFrame frame) {
 		this.frame = frame;
 	}
 
+	@Override
 	public void run() {
 
-		boolean game = frame.getSnakeWorldComponent().getWorld().getBody().isStatus();
+		SnakeWorldComponent component = frame.getSnakeWorldComponent();
+		SnakeWorld world = component.getWorld();
+		SnakeBody body = world.getBody();
+
+		boolean game = body.isStatus();
 		while (game) {
-			//String direction = 
-			
-			frame.getSnakeWorldComponent().repaint();
-			game = frame.getSnakeWorldComponent().getWorld().getBody().isStatus();
-			frame.getSnakeWorldComponent().getWorld().getBody().moveSnake(frame.getKeyPressed(),frame.getSnakeWorldComponent().getWorld().getFood());
-				
-			
+			// String direction =
+
+			component.repaint();
+			game = body.isStatus();
+			body.moveSnake(frame.getKeyPressed(), world.getFood());
+
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -34,6 +32,5 @@ public class GameThread extends Thread {
 		}
 
 	}
-
 
 }
