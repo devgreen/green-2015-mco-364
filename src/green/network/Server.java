@@ -9,7 +9,7 @@ public class Server {
 	public static void main(String[] args) {
 
 		try {
-			ServerSocket serverSocket = new ServerSocket(5955);
+			ServerSocket serverSocket = new ServerSocket(1123);
 			while (true) {
 				Socket socket = serverSocket.accept();
 				if (socket != null) {
