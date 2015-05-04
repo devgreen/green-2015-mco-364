@@ -13,7 +13,7 @@ public class Client2 {
 
 		Socket socket = null;
 		try {
-			socket = new Socket("localhost", 5959);
+			socket = new Socket("localhost", 1123);
 			OutputStream out = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(out);
 			writer.println("This is client 2");

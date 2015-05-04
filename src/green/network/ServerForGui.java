@@ -10,7 +10,7 @@ public class ServerForGui {
 
 	private ServerSocket serverSocket;
 	private JTextArea area;
-	SocketThread thread;
+	private SocketThread thread;
 
 	public ServerForGui(JTextArea area) throws IOException {
 		serverSocket = new ServerSocket(1111);

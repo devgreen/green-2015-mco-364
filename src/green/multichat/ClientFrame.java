@@ -1,50 +1,61 @@
-package green.network;
+package green.multichat;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.BlockingQueue;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class GuiForClient extends JFrame {
+public class ClientFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JTextField text;
 	private JButton submit;
 	private JTextArea area;
-	private ClientForGui client;
+	private Client client;
 
-	public GuiForClient() throws UnknownHostException, IOException {
-
+	public ClientFrame() throws UnknownHostException, IOException {
 		setSize(800, 600);
 		setTitle("Client Chat");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container container = getContentPane();
 		container.setLayout(new BorderLayout());
-
+		
 		area = new JTextArea();
+		
 		container.add(area, BorderLayout.CENTER);
+		client = new Client(area);
 		text = new JTextField("enter comment here");
 		Container south = new Container();
 		south.setLayout(new BoxLayout(south, BoxLayout.X_AXIS));
 		south.add(text);
 
-		client = new ClientForGui(area);
 		ActionListener submitText = new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				area.append(text.getText() + "\n");
-				PrintWriter writer = client.getSocketThread().getOut();
-				writer.println(text.getText() + "\n");
-				writer.flush();
+				try {
+					String message = text.getText();
+					OutputStream out = client.getSocket().getOutputStream();
+					PrintWriter writer = new PrintWriter(out);
+					writer.println(message);
+					writer.flush();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				text.setText("");
+
 			}
 		};
 
@@ -52,17 +63,9 @@ public class GuiForClient extends JFrame {
 		submit.addActionListener(submitText);
 		south.add(submit);
 		container.add(south, BorderLayout.SOUTH);
-	}
-
-	public static void main(String[] args) {
-		try {
-			GuiForClient frame = new GuiForClient();
-			frame.setVisible(true);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 	}
+
+
+
 }

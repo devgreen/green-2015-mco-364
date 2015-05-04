@@ -14,7 +14,7 @@ public class Client {
 
 		Socket socket = null;
 		try {
-			socket = new Socket("192.168.1.4", 3763);
+			socket = new Socket("localhost", 1123);
 			OutputStream out = socket.getOutputStream();
 			PrintWriter writer = new PrintWriter(out);
 			writer.println("Do or do not, there is no try");

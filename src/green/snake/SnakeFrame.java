@@ -40,13 +40,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		keyPressed = e.getKeyCode();
-		
-			//direction = "left";
-			//screen.getBody().callMove(keyPressed, screen.getFood());
-		
-		
-		
+		keyPressed = e.getKeyCode();		
 	}
 
 	public SnakeWorld getScreen() {
@@ -60,7 +54,7 @@ public class SnakeFrame extends JFrame implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
