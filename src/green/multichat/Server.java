@@ -13,8 +13,6 @@ public class Server implements ReaderListener{
 	private LinkedBlockingQueue<String> messages;
 	private List<Socket> sockets;
 	private WriterThread writer;
-	// private ReaderListener listener;
-
 	private ServerSocket serverSocket;
 
 	public Server() throws IOException {
@@ -22,7 +20,6 @@ public class Server implements ReaderListener{
 		serverSocket = new ServerSocket(1112);
 		sockets = new ArrayList<Socket>();
 		messages = new LinkedBlockingQueue<String>();
-		// this.listener = listener;
 		writer = new WriterThread(this);
 		writer.start();
 
@@ -47,7 +44,6 @@ public class Server implements ReaderListener{
 	
 	@Override
 	public void onLineRead(String string) {
-		System.out.println ("adding");
 		messages.add(string);
 		
 	}

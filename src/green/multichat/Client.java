@@ -14,6 +14,8 @@ public class Client implements ReaderListener {
 	public Client(JTextArea area) throws UnknownHostException, IOException {
 		socket = new Socket("localhost", 1112);
 		this.area = area;
+		ReaderThread thread = new ReaderThread (socket, this);
+		thread.start();
 
 	}
 
@@ -29,7 +31,6 @@ public class Client implements ReaderListener {
 
 	@Override
 	public void onCloseSocket(Socket socket) {
-		// TODO Auto-generated method stub
 
 	}
 
