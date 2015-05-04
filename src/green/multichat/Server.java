@@ -3,12 +3,11 @@ package green.multichat;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class Server implements ReaderListener{
+public class Server implements ReaderListener {
 
 	private LinkedBlockingQueue<String> messages;
 	private List<Socket> sockets;
@@ -24,9 +23,8 @@ public class Server implements ReaderListener{
 		writer.start();
 
 	}
-	
-	
-	public void run (){
+
+	public void run() {
 		while (true) {
 			Socket socket;
 			try {
@@ -37,22 +35,20 @@ public class Server implements ReaderListener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 
 		}
 	}
-	
+
 	@Override
 	public void onLineRead(String string) {
 		messages.add(string);
-		
+
 	}
 
 	@Override
 	public void onCloseSocket(Socket socket) {
-		
-	}
 
+	}
 
 	public LinkedBlockingQueue<String> getMessages() {
 		return messages;
@@ -61,19 +57,5 @@ public class Server implements ReaderListener{
 	public List<Socket> getSockets() {
 		return sockets;
 	}
-
-	public WriterThread getWriter() {
-		return writer;
-	}
-
-	public ServerSocket getServerSocket() {
-		return serverSocket;
-	}
-
-	public void setServerSocket(ServerSocket serverSocket) {
-		this.serverSocket = serverSocket;
-	}
-
-
 
 }

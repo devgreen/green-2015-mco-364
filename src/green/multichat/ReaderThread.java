@@ -35,7 +35,6 @@ public class ReaderThread extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// listener.onCloseSocket(socket);
 
 	}
 

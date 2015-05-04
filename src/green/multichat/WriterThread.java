@@ -24,15 +24,11 @@ public class WriterThread extends Thread {
 			String message;
 			try {
 				message = messages.take();
-				int i = 0;
-				for (Socket socket : sockets) {	
-					System.out.println (message + " " + i);
+				for (Socket socket : sockets) {
 					OutputStream out = socket.getOutputStream();
 					PrintWriter writer = new PrintWriter(out);
 					writer.println(message);
-					writer.flush();	
-					System.out.println ("i flushed!");
-					i++;
+					writer.flush();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
