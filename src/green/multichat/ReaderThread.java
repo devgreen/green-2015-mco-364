@@ -14,15 +14,11 @@ public class ReaderThread extends Thread {
 	public ReaderThread(Socket socket, ReaderListener listener) {
 		this.socket = socket;
 		this.listener = listener;
-		
 
 	}
 
 	@Override
 	public void run() {
-		
-		System.out.println("reader thread");
-
 		InputStream in;
 		try {
 			in = socket.getInputStream();
