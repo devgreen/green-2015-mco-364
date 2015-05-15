@@ -11,10 +11,11 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 	private Canvas canvas;
 	private int prevX;
 	private int prevY;
+	private Color color;
 
 	public DrawListener(Canvas canvas) {
 		this.canvas = canvas;
-
+		color = Color.BLACK;
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		int y = event.getY();
 
 		Graphics graphics = canvas.getImage().getGraphics();
-		graphics.setColor(Color.BLACK);
+		graphics.setColor(color);
 		graphics.drawLine(x, y, x, y);
 		prevX = x;
 		prevY = y;
@@ -57,7 +58,7 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		int y = event.getY();
 
 		Graphics graphics = canvas.getImage().getGraphics();
-		graphics.setColor(Color.BLACK);
+		graphics.setColor(color);
 		graphics.drawLine(prevX, prevY, x, y);
 
 		prevX = x;
@@ -69,6 +70,14 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
 
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 }
