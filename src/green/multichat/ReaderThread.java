@@ -25,7 +25,6 @@ public class ReaderThread extends Thread {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				System.out.println(line + " reader thread");
 				listener.onLineRead(line);
 			}
 		} catch (IOException e) {

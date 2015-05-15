@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -17,9 +18,9 @@ public class Server implements ReaderListener {
 	public Server() throws IOException {
 
 		serverSocket = new ServerSocket(1112);
-		sockets = new ArrayList<Socket>();
+		sockets = new LinkedList<Socket>();
 		messages = new LinkedBlockingQueue<String>();
-		writer = new WriterThread(this);
+		writer = new WriterThread(messages, sockets);
 		writer.start();
 
 	}
