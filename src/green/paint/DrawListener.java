@@ -24,6 +24,7 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 	public DrawListener(Canvas canvas) {
 		this.canvas = canvas;
 		this.color = Color.BLACK;
+		canvas.setColor(color);
 		this.number = 1;
 	}
 
@@ -45,12 +46,13 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mousePressed(MouseEvent event) {
 		mousePressed = event.getPoint();
-		canvas.setMousePressed(mousePressed);
+
 		int x = event.getX();
 		int y = event.getY();
 
 		Graphics graphics = canvas.getImage().getGraphics();
 		graphics.setColor(color);
+		canvas.setColor(color);
 		graphics.drawLine(x, y, x, y);
 		prevX = x;
 		prevY = y;
@@ -60,18 +62,23 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		Graphics graphics = canvas.getImage().getGraphics();
-		graphics.setColor(color);
-		int x = Math.min(mousePressed.x, mouseDragged.x);
-		int y = Math.min(mousePressed.y, mouseDragged.y);
-		int width = Math.abs(mousePressed.x - mouseDragged.x);
-		int height = Math.abs(mousePressed.y - mouseDragged.y);
-		graphics.drawRect(x, y, width, height);
+		if (number != 1) {
+			Graphics graphics = canvas.getImage().getGraphics();
+			graphics.setColor(color);
+			int x = Math.min(mousePressed.x, mouseDragged.x);
+			int y = Math.min(mousePressed.y, mouseDragged.y);
+			int width = Math.abs(mousePressed.x - mouseDragged.x);
+			int height = Math.abs(mousePressed.y - mouseDragged.y);
+			graphics.drawRect(x, y, width, height);
+
+		}
+		
 		canvas.repaint();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent event) {
+
 		mouseDragged = event.getPoint();
 		canvas.setMouseDragged(mouseDragged);
 		int x = event.getX();
@@ -84,13 +91,17 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		Graphics graphics = canvas.getImage().getGraphics();
 		graphics.setColor(color);
 		if (number == 1) {
+			canvas.setMouseDragged(null);
 			graphics.drawLine(prevX, prevY, x, y);
 
 			prevX = x;
 			prevY = y;
 			canvas.repaint();
+		} else {
+			canvas.setMousePressed(mousePressed);
+
 		}
-		
+
 		canvas.repaint();
 
 	}

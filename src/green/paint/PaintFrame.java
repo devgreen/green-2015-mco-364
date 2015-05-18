@@ -15,6 +15,8 @@ import javax.swing.text.html.StyleSheet;
 public class PaintFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 600;
 	private Canvas canvas;
 	private DrawListener drawListener;
 	private JButton pencil;
@@ -73,6 +75,7 @@ public class PaintFrame extends JFrame {
 			
 			if (shape.getText().equals("pencil")){
 				drawListener.setNumber(1);
+				System.out.println (drawListener.getNumber());
 			}
 			else {
 				drawListener.setNumber(2);
