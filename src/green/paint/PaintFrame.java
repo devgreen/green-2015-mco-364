@@ -15,12 +15,12 @@ import javax.swing.text.html.StyleSheet;
 public class PaintFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 600;
+	
 	private Canvas canvas;
 	private DrawListener drawListener;
 	private JButton pencil;
 	private JButton rectangle;
+	private JButton clear;
 
 	public PaintFrame() {
 
@@ -50,6 +50,9 @@ public class PaintFrame extends JFrame {
 		rectangle.addActionListener(changeShape);
 		north.add(pencil);
 		north.add(rectangle);
+		clear = new JButton("clear");
+		clear.addActionListener(clearListener);
+		north.add(clear);
 
 	}
 
@@ -73,16 +76,29 @@ public class PaintFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JButton shape = (JButton) e.getSource();
 			
-			if (shape.getText().equals("pencil")){
+			if (shape.equals(pencil)){
 				drawListener.setNumber(1);
-				System.out.println (drawListener.getNumber());
+				//System.out.println (drawListener.getNumber());
 			}
 			else {
 				drawListener.setNumber(2);
-				System.out.println (drawListener.getNumber());
+				//System.out.println (drawListener.getNumber());
 				
 			}
 
+		}
+
+	};
+	ActionListener clearListener = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton button = (JButton) e.getSource();
+			if (button.equals(clear)){
+			canvas.getImage().getGraphics().setColor(Color.WHITE);
+			canvas.getImage().getGraphics().fillRect(0, 0, WIDTH, HEIGHT);
+			canvas.repaint();
+			}
 		}
 
 	};

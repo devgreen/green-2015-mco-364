@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 public class Canvas extends JPanel {
 
+	
+	private static final long serialVersionUID = 1L;
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 600;
 	private BufferedImage image;
 	private Point mousePressed;
 	private Point mouseDragged;
@@ -32,13 +36,13 @@ public class Canvas extends JPanel {
 			int width = Math.abs(mousePressed.x - mouseDragged.x);
 			int height = Math.abs(mousePressed.y - mouseDragged.y);
 			int location = x+ width;
-			if (location > 600){
-				int over = location - 600;
+			if (location > WIDTH){
+				int over = location -WIDTH;
 				width -=over;
 			}
 			location = y + height;
-			if (location > 600){
-				int over = location - 600;
+			if (location > HEIGHT){
+				int over = location - HEIGHT;
 				height -=over;
 			}
 			
