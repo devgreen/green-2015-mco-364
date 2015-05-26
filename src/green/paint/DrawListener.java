@@ -57,7 +57,6 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 		prevX = x;
 		prevY = y;
 		canvas.repaint();
-
 	}
 
 	@Override
@@ -70,9 +69,10 @@ public class DrawListener implements MouseListener, MouseMotionListener {
 			int width = Math.abs(mousePressed.x - mouseDragged.x);
 			int height = Math.abs(mousePressed.y - mouseDragged.y);
 			graphics.drawRect(x, y, width, height);
+			canvas.setMouseDragged(null);
 
 		}
-		
+
 		canvas.repaint();
 	}
 
