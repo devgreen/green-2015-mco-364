@@ -16,6 +16,10 @@ public class Canvas extends JPanel {
 	private Point mousePressed;
 	private Point mouseDragged;
 	private Color color;
+	public Color getColor() {
+		return color;
+	}
+
 	private BrushListener listener;
 
 	public Canvas(int width, int height) {
@@ -43,6 +47,7 @@ public class Canvas extends JPanel {
 		 * 
 		 * g.setColor(color); g.drawRect(x, y, width, height); }
 		 */
+		g.setColor(color);
 		if (listener != null && mousePressed != null) {
 			listener.draw(g);
 		}

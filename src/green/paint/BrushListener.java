@@ -23,7 +23,6 @@ public abstract class BrushListener implements MouseListener, MouseMotionListene
 		this.canvas = canvas;
 		graphics = this.canvas.getImage().getGraphics();
 		graphics.setColor(Color.BLACK);
-		System.out.println (graphics);
 	}
 
 	@Override
@@ -80,10 +79,7 @@ public abstract class BrushListener implements MouseListener, MouseMotionListene
 		canvas.setMouseDragged(null);
 		mousePressed =null;
 		mouseDragged = null;
-		System.out.println ("mr " + graphics);
 		
-		//canvas.repaint();
-
 	}
 	
 	public abstract void draw(Graphics g);
